@@ -10,10 +10,8 @@ import com.vvuono.flickrbrowser.view.BaseActivity;
 
 import butterknife.BindView;
 
-public class BrowserActivity extends BaseActivity implements BrowserContract.View {
+public class BrowserActivity extends BaseActivity<BrowserPresenter> implements BrowserContract.View {
     @BindView(R.id.tv_test) TextView mTestText;
-
-    private BrowserPresenter mPresenter;
 
     @Override
     protected int getContentResource() {
@@ -22,15 +20,12 @@ public class BrowserActivity extends BaseActivity implements BrowserContract.Vie
 
     @Override
     protected void init(@Nullable Bundle state) {
-        mPresenter = new BrowserPresenter(); // TODO: Replace this with dependency injection
-        mPresenter.attach(this);
-        mPresenter.loadImages();
+        getPresenter().loadImages();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.detach();
+    protected void injectDependencies() {
+        getActivityComponent().inject(this);
     }
 
     @Override
