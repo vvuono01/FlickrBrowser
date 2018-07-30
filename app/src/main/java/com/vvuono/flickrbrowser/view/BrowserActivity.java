@@ -2,18 +2,23 @@ package com.vvuono.flickrbrowser.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.vvuono.flickrbrowser.R;
 import com.vvuono.flickrbrowser.contracts.BrowserContract;
 import com.vvuono.flickrbrowser.presenter.BrowserPresenter;
-import com.vvuono.flickrbrowser.view.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
 public class BrowserActivity extends BaseActivity<BrowserPresenter> implements BrowserContract.View {
+    @BindView(R.id.vp_imagePager) ViewPager mViewPager;
+
+    private ImageAdapter mImageAdapter;
+
     @Override
     protected int getContentResource() {
         return R.layout.activity_browser;
@@ -21,6 +26,9 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
 
     @Override
     protected void init(@Nullable Bundle state) {
+        mImageAdapter = new ImageAdapter(this);
+        mViewPager.setAdapter(mImageAdapter);
+
         getPresenter().loadImages();
     }
 
@@ -31,6 +39,7 @@ public class BrowserActivity extends BaseActivity<BrowserPresenter> implements B
 
     @Override
     public void onImagesLoaded(List<String> imageData) {
-        // TODO: Send URLs to adapter
+        mImageAdapter.setImages(imageData);
+        mImageAdapter.notifyDataSetChanged();
     }
 }
