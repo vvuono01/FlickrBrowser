@@ -1,13 +1,14 @@
 package com.vvuono.flickrbrowser.presenter;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.vvuono.flickrbrowser.contracts.BrowserContract;
 import com.vvuono.flickrbrowser.model.FlickrApiInterface;
+import com.vvuono.flickrbrowser.model.FlickrPhoto;
 import com.vvuono.flickrbrowser.model.FlickrPhotoResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -47,23 +48,27 @@ public class BrowserPresenter extends BasePresenter<BrowserContract.View>
                         String truncatedJson = rawJson.substring(0, rawJson.length() - 1);
                         String json = truncatedJson.replace("jsonFlickrApi(", "");
                         Gson gson = new Gson();
-                        FlickrPhotoResponse photos = gson.fromJson(json, FlickrPhotoResponse.class);
-                        getView().onImagesLoaded("Success!");
+                        FlickrPhotoResponse photoResponse = gson.fromJson(json, FlickrPhotoResponse.class);
+
+                        List<String> urls = new ArrayList<>();
+                        FlickrPhoto[] photos = photoResponse.getPhotos().getPhotos();
+                        for (int i = 0; i < photos.length; i++) {
+                            urls.add(photos[i].getFlickrUrl());
+                        }
+
+                        getView().onImagesLoaded(urls);
                     } catch (IOException io) {
                         io.printStackTrace();
-                        getView().onImagesLoaded("Failure!");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     t.printStackTrace();
-                    getView().onImagesLoaded("Failure!");
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
-            getView().onImagesLoaded("Exception!");
         }
     }
 }

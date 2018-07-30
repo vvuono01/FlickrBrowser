@@ -73,4 +73,13 @@ public class FlickrPhoto {
         sb.append('}');
         return sb.toString();
     }
+
+    public String getFlickrUrl() {
+        final StringBuilder sb = new StringBuilder("https://farm");
+        sb.append(mFarm).append(".staticflickr.com/");
+        sb.append(mServer).append("/");
+        sb.append(mId).append("_");
+        sb.append(mSecret).append(".jpg");
+        return sb.toString();
+    }
 }
