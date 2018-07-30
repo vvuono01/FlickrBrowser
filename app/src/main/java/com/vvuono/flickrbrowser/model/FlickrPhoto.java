@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class FlickrPhoto {
     @SerializedName("id")
-    int mId;
+    String mId;
     @SerializedName("owner")
     String mOwner;
     @SerializedName("secret")
@@ -14,24 +14,13 @@ public class FlickrPhoto {
     @SerializedName("title")
     String mTitle;
     @SerializedName("ispublic")
-    boolean mIsPublic;
+    int mIsPublic;
     @SerializedName("isfriend")
-    boolean mIsFriend;
+    int mIsFriend;
     @SerializedName("isfamily")
-    boolean mIsFamily;
+    int mIsFamily;
 
-    public FlickrPhoto(int id, String owner, String secret, int server, String title, boolean isPublic, boolean isFriend, boolean isFamily) {
-        mId = id;
-        mOwner = owner;
-        mSecret = secret;
-        mServer = server;
-        mTitle = title;
-        mIsPublic = isPublic;
-        mIsFriend = isFriend;
-        mIsFamily = isFamily;
-    }
-
-    public int getId() {
+    public String getId() {
         return mId;
     }
 
@@ -52,14 +41,29 @@ public class FlickrPhoto {
     }
 
     public boolean isPublic() {
-        return mIsPublic;
+        return mIsPublic == 1;
     }
 
     public boolean isFriend() {
-        return mIsFriend;
+        return mIsFriend == 1;
     }
 
     public boolean isFamily() {
-        return mIsFamily;
+        return mIsFamily == 1;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FlickrPhoto{");
+        sb.append("mId='").append(mId).append('\'');
+        sb.append(", mOwner='").append(mOwner).append('\'');
+        sb.append(", mSecret='").append(mSecret).append('\'');
+        sb.append(", mServer=").append(mServer);
+        sb.append(", mTitle='").append(mTitle).append('\'');
+        sb.append(", mIsPublic=").append(mIsPublic);
+        sb.append(", mIsFriend=").append(mIsFriend);
+        sb.append(", mIsFamily=").append(mIsFamily);
+        sb.append('}');
+        return sb.toString();
     }
 }
