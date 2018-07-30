@@ -1,6 +1,6 @@
 package com.vvuono.flickrbrowser.components;
 
-import com.vvuono.flickrbrowser.BrowserActivity;
+import com.vvuono.flickrbrowser.view.BrowserActivity;
 import com.vvuono.flickrbrowser.modules.ActivityModule;
 
 import javax.inject.Singleton;

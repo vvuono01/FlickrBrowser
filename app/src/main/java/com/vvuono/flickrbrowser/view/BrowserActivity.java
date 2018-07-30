@@ -1,9 +1,10 @@
-package com.vvuono.flickrbrowser;
+package com.vvuono.flickrbrowser.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
+import com.vvuono.flickrbrowser.R;
 import com.vvuono.flickrbrowser.contracts.BrowserContract;
 import com.vvuono.flickrbrowser.presenter.BrowserPresenter;
 import com.vvuono.flickrbrowser.view.BaseActivity;
