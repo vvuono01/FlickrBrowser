@@ -36,7 +36,7 @@ public class BrowserPresenter extends BasePresenter<BrowserContract.View>
 
     @Override
     public void loadImages() {
-        String API_KEY = "72600809d205a8d20a6effeec1027aea"; // TODO
+        String API_KEY = "72600809d205a8d20a6effeec1027aea";
         Call<ResponseBody> photoCall = mFlickrApi.getPhotos(API_KEY);
         try {
             photoCall.enqueue(new Callback<ResponseBody>() {
