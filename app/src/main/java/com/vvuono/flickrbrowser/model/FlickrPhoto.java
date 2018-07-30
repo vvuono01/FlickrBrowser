@@ -11,6 +11,8 @@ public class FlickrPhoto {
     String mSecret;
     @SerializedName("server")
     int mServer;
+    @SerializedName("farm")
+    int mFarm;
     @SerializedName("title")
     String mTitle;
     @SerializedName("ispublic")
@@ -36,6 +38,10 @@ public class FlickrPhoto {
         return mServer;
     }
 
+    public int getFarm() {
+        return mFarm;
+    }
+
     public String getTitle() {
         return mTitle;
     }
@@ -59,6 +65,7 @@ public class FlickrPhoto {
         sb.append(", mOwner='").append(mOwner).append('\'');
         sb.append(", mSecret='").append(mSecret).append('\'');
         sb.append(", mServer=").append(mServer);
+        sb.append(", mFarm=").append(mFarm);
         sb.append(", mTitle='").append(mTitle).append('\'');
         sb.append(", mIsPublic=").append(mIsPublic);
         sb.append(", mIsFriend=").append(mIsFriend);
